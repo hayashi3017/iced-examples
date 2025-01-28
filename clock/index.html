@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trunk test</title>
+<link rel="modulepreload" href="/iced-examples/clock-6654d9acf4335a15.js" crossorigin="anonymous" integrity="sha384-inP5ME/YLHeErmgQMsUxasAGIqsswAqz/2e10VbJ2YaJdlIoPxfyt2Lxg7JIuk6c"><link rel="preload" href="/iced-examples/clock-6654d9acf4335a15_bg.wasm" crossorigin="anonymous" integrity="sha384-BVYOAHQZMgxWel2/aBjB65eGdvnGHGEoFRLn7h72qzOqg394thiwXoAyZb+2QPrj" as="fetch" type="application/wasm"></head>
+<body>
+  Any changes.
+
+<script type="module">
+import init, * as bindings from '/iced-examples/clock-6654d9acf4335a15.js';
+const wasm = await init({ module_or_path: '/iced-examples/clock-6654d9acf4335a15_bg.wasm' });
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script></body>
+</html>
