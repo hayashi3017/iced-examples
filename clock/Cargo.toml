@@ -14,3 +14,5 @@ tracing-subscriber.workspace = true
 console_error_panic_hook = "0.1.6"
 tracing-wasm = "0.2"
 wasm-bindgen-futures = "0.4"
+# https://github.com/rustwasm/wasm-bindgen/issues/2215#issuecomment-1131707941
+parking_lot_core = "=0.8.0"

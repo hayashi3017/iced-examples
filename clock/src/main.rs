@@ -10,7 +10,10 @@ use iced::{
 };
 
 pub fn main() -> iced::Result {
+    #[cfg(not(target_arch = "wasm32"))]
     tracing_subscriber::fmt::init();
+    #[cfg(target_arch = "wasm32")]
+    tracing_wasm::set_as_global_default();
 
     iced::application("Clock - Iced", Clock::update, Clock::view)
         .subscription(Clock::subscription)

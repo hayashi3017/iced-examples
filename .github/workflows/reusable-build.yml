@@ -1,0 +1,31 @@
+name: Reusable Build Workflow
+
+on:
+  workflow_call:
+    inputs:
+      dir-name:
+        description: 'Directory name used in executing trunk build.'
+        required: true
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: jetli/trunk-action@v0.5.0
+        with:
+          # Optional version of trunk to install(eg. 'v0.19.1', 'latest')
+          version: "latest"
+
+      - name: Build with trunk
+        run: rustup target add wasm32-unknown-unknown && cd ${{ inputs.dir-name }} && RUSTFLAGS='--cfg=web_sys_unstable_apis' trunk build --release --public-url /iced-examples
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./${{ inputs.dir-name }}/dist
+          force_orphan: true
